@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using Catalog.Api.Infrastructure;
+using Catalog.Api.InputModel;
+using Catalog.Api.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +29,10 @@ namespace Catalog.Api
             services.AddDbContext<CatalogContext>(opt =>
                 opt.UseInMemoryDatabase("Catalog"));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("catalog-api", new Info
@@ -45,7 +51,7 @@ namespace Catalog.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

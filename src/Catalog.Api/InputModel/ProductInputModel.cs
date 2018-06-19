@@ -8,6 +8,7 @@ namespace Catalog.Api.InputModel
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
         public decimal Price { get; set; }
+        public bool ConfirmPrice { get; set; }
     }
     
     public class UpdateProductInputModel
@@ -17,5 +18,6 @@ namespace Catalog.Api.InputModel
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
         public decimal Price { get; set; }
+        public bool ConfirmPrice { get; set; }
     }
 }
