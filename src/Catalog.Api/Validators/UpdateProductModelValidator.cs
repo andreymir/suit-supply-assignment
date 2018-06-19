@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Api.DomainModel;
 using Catalog.Api.Infrastructure;
@@ -18,15 +19,17 @@ namespace Catalog.Api.Validators
             _catalogContext = catalogContext;
 
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Code).NotEmpty().MustAsync(CheckCodeUnique1);
+            RuleFor(x => x.Code).NotEmpty().MustAsync(CheckCodeUnique);
             RuleFor(x => x.Price).GreaterThan(0);
             RuleFor(x => x.ConfirmPrice).Must(CheckPrice);
         }
 
-        private async Task<bool> CheckCodeUnique1(UpdateProductInputModel model, string value, PropertyValidatorContext context, CancellationToken cancellationToken)
+        private async Task<bool> CheckCodeUnique(UpdateProductInputModel model, string value, PropertyValidatorContext context, CancellationToken cancellationToken)
         {
-            return await _catalogContext.Products.AllAsync(
-                x => x.Id != model.Id && x.Code != value, cancellationToken);
+            return await _catalogContext.Products
+                .AllAsync(
+                    x => x.Id == model.Id || x.Code != value,
+                    cancellationToken);
         }
 
         private static bool CheckPrice(UpdateProductInputModel model, bool value)
