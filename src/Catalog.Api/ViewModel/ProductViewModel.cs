@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Catalog.Api.Model
+namespace Catalog.Api.ViewModel
 {
-    public class Product
+    public class ProductViewModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
