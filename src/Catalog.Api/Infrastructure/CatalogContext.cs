@@ -1,5 +1,6 @@
 ﻿using Catalog.Api.DomainModel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Catalog.Api.Infrastructure
 {
@@ -14,7 +15,17 @@ namespace Catalog.Api.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            // Configure to auto update LastUpdated value
+            builder.Entity<Product>()
+                .Property(p => p.LastUpdated)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("GETUTCDATE()")
+                .Metadata.AfterSaveBehavior = PropertySaveBehavior.Ignore;
+
+            // Configure LastUpdated column as concurrency token
+            builder.Entity<Product>()
+                .Property(p => p.LastUpdated)
+                .IsConcurrencyToken();
         }
     }
 }

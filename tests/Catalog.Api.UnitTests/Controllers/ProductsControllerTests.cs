@@ -39,7 +39,7 @@ namespace Catalog.Api.UnitTests.Controllers
 
             var config = new MapperConfiguration(cfg =>
             {
-                InputModel.Mappings.ConfigureInputModelMapping(cfg);
+                Mappings.ConfigureInputModelMapping(cfg);
                 ViewModel.Mappings.ConfigureViewModelMapping(cfg);
             });
             _mapper = new Mapper(config);
