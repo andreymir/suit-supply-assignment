@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.Api.ViewModel
+namespace Catalog.Api.ViewModels
 {
     public class ProductViewModel
     {

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Api.DomainModel;
 using Catalog.Api.Infrastructure;
-using Catalog.Api.InputModel;
-using Catalog.Api.ViewModel;
+using Catalog.Api.InputModels;
+using Catalog.Api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

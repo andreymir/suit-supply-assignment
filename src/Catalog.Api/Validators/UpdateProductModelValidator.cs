@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Api.DomainModel;
 using Catalog.Api.Infrastructure;
-using Catalog.Api.InputModel;
+using Catalog.Api.InputModels;
 using FluentValidation;
 using FluentValidation.Validators;
 using Microsoft.EntityFrameworkCore;

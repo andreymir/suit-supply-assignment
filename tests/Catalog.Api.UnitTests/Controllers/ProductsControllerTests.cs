@@ -7,7 +7,7 @@ using AutoMapper;
 using Catalog.Api.Controllers;
 using Catalog.Api.DomainModel;
 using Catalog.Api.Infrastructure;
-using Catalog.Api.InputModel;
+using Catalog.Api.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -40,7 +40,7 @@ namespace Catalog.Api.UnitTests.Controllers
             var config = new MapperConfiguration(cfg =>
             {
                 Mappings.ConfigureInputModelMapping(cfg);
-                ViewModel.Mappings.ConfigureViewModelMapping(cfg);
+                Api.ViewModels.Mappings.ConfigureViewModelMapping(cfg);
             });
             _mapper = new Mapper(config);
 

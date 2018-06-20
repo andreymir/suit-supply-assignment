@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Catalog.Api.Infrastructure;
-using Catalog.Api.InputModel;
+using Catalog.Api.InputModels;
 using Catalog.Api.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -43,8 +43,8 @@ namespace Catalog.Api
 
             services.AddAutoMapper(cfg =>
             {
-                ViewModel.Mappings.ConfigureViewModelMapping(cfg);
-                InputModel.Mappings.ConfigureInputModelMapping(cfg);
+                ViewModels.Mappings.ConfigureViewModelMapping(cfg);
+                Mappings.ConfigureInputModelMapping(cfg);
             });
         }
 

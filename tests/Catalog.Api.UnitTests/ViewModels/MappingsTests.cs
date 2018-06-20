@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Catalog.Api.ViewModels;
+using NUnit.Framework;
 
 namespace Catalog.Api.UnitTests.ViewModels
 {
@@ -8,7 +9,7 @@ namespace Catalog.Api.UnitTests.ViewModels
         public void InputModel_mappings_is_valid()
         {
             var config = new AutoMapper.MapperConfiguration(
-                ViewModel.Mappings.ConfigureViewModelMapping);
+                Mappings.ConfigureViewModelMapping);
             
             config.AssertConfigurationIsValid();
         }

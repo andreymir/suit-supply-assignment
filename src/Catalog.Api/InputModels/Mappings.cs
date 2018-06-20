@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Catalog.Api.DomainModel;
 
-namespace Catalog.Api.InputModel
+namespace Catalog.Api.InputModels
 {
     public static class Mappings
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Catalog.Api.InputModel
+﻿namespace Catalog.Api.InputModels
 {
     public class AddProductInputModel
     {

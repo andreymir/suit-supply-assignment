@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Catalog.Api.InputModels;
+using NUnit.Framework;
 
-namespace Catalog.Api.UnitTests.InputModel
+namespace Catalog.Api.UnitTests.InputModels
 {
     public class MappingsTests
     {
@@ -8,7 +9,7 @@ namespace Catalog.Api.UnitTests.InputModel
         public void InputModel_mappings_is_valid()
         {
             var config = new AutoMapper.MapperConfiguration(
-                Catalog.Api.InputModel.Mappings.ConfigureInputModelMapping);
+                Mappings.ConfigureInputModelMapping);
             
             config.AssertConfigurationIsValid();
         }

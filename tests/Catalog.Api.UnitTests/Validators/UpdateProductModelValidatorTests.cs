@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using Catalog.Api.DomainModel;
 using Catalog.Api.Infrastructure;
-using Catalog.Api.InputModel;
+using Catalog.Api.InputModels;
 using Catalog.Api.Validators;
 using FluentValidation.TestHelper;
 using Microsoft.EntityFrameworkCore;
