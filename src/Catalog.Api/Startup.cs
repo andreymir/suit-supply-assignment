@@ -27,7 +27,8 @@ namespace Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CatalogContext>(opt =>
-                opt.UseInMemoryDatabase("Catalog"));
+                opt.UseSqlServer(Configuration.GetConnectionString("Catalog")));
+                //opt.UseInMemoryDatabase("Catalog"));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)

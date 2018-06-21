@@ -15,6 +15,18 @@ namespace Catalog.Api.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Product>()
+                .Property(p => p.Code)
+                .IsRequired();
+            
+            builder.Entity<Product>()
+                .Property(p => p.Name)
+                .IsRequired();
+            
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+            
             // Configure to auto update LastUpdated value
             builder.Entity<Product>()
                 .Property(p => p.LastUpdated)
