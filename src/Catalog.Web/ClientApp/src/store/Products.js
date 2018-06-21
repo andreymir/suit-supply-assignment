@@ -2,6 +2,7 @@
 const receiveProductsType = 'RECEIVE_PRODUCTS';
 const removeProductType = 'REMOVE_PRODUCT';
 const addProductType = 'ADD_PRODUCT';
+const updateProductType = 'UPDATE_PRODUCT';
 
 const initialState = {products: [], isLoading: false};
 
@@ -58,6 +59,28 @@ export const actionCreators = {
 
         dispatch({type: receiveProductsType, term, products});
     },
+
+    updateProduct: product => async (dispatch, getState) => {
+        dispatch({type: updateProductType, product});
+
+        let url = '/api/v1/products/';
+        await fetch(url, {
+            method: 'PUT',
+            cache: 'no-cache',
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+            },
+            body: JSON.stringify(product),
+        });
+
+        const term = getState().products.term;
+        url = `/api/v1/products?term=${term}`;
+        const response = await fetch(url);
+        const products = await response.json();
+
+        dispatch({type: receiveProductsType, term, products});
+    }
 };
 
 export const reducer = (state, action) => {

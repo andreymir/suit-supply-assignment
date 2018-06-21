@@ -14,10 +14,19 @@ class Home extends Component {
         this.props.requestProducts(term);
     }
 
-    handleRemoveProduct = (props, productId) => () => {
-        this.props.removeProduct(productId);
+    handleRemoveProduct = (product) => () => {
+        this.props.removeProduct(product.id);
     };
 
+    handleUpdateProduct = (product) => () => {
+        this.props.updateProduct({
+            id: product.id,
+            code: this.state.code,
+            name: this.state.name,
+            price: this.state.price,
+        });
+    };
+    
     handleAddProduct = () => {
         this.props.addProduct({
             code: this.state.code,
@@ -33,7 +42,7 @@ class Home extends Component {
         })
     };
 
-    renderDetails(props) {
+    renderDetails() {
         return (
             <Form inline>
                 <FormGroup controlId="formCode">
@@ -55,7 +64,7 @@ class Home extends Component {
         );
     }
 
-    renderTable(props) {
+    renderTable() {
         return (
             <Table striped bordered condensed hover>
                 <thead>
@@ -69,19 +78,19 @@ class Home extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {props.products.map(product =>
+                {this.props.products.map(product =>
                     <tr key={product.id}>
                         <td>{product.id}</td>
                         <td>{product.code}</td>
                         <td>{product.name}</td>
                         <td>{product.price}</td>
-                        <td>{product.lastUpdated}</td>
+                        {/*<td>{product.lastUpdated}</td>*/}
                         <td>
                             <ButtonGroup>
-                                <Button>
+                                <Button onClick={this.handleUpdateProduct(product)}>
                                     <Glyphicon glyph="pencil"/>
                                 </Button>
-                                <Button onClick={this.handleRemoveProduct(props, product.id)}>
+                                <Button onClick={this.handleRemoveProduct(product)}>
                                     <Glyphicon glyph="trash"/>
                                 </Button>
                             </ButtonGroup>
@@ -100,10 +109,10 @@ class Home extends Component {
                     <h1>Products</h1>
                 </Row>
                 <Row>
-                    {this.renderTable(this.props)}
+                    {this.renderTable()}
                 </Row>
                 <Row>
-                    {this.renderDetails(this.props)}
+                    {this.renderDetails()}
                 </Row>
             </Grid>
         );
