@@ -6,16 +6,13 @@ const updateProductType = 'UPDATE_PRODUCT';
 
 const initialState = {products: [], isLoading: false};
 
+const catalogServiceUrl = 'http://localhost:5050';
+
 export const actionCreators = {
     requestProducts: term => async (dispatch, getState) => {
-        if (term === getState().products.term) {
-            // Don't issue a duplicate request (we already have or are loading the requested data)
-            return;
-        }
-
         dispatch({type: requestProductsType, term});
 
-        const url = `/api/v1/products?term=${term}`;
+        const url = `${catalogServiceUrl}/api/v1/products?term=${term}`;
         const response = await fetch(url);
         const products = await response.json();
 
@@ -25,13 +22,13 @@ export const actionCreators = {
     removeProduct: productId => async (dispatch, getState) => {
         dispatch({type: removeProductType, id: productId});
 
-        let url = `/api/v1/products/${productId}`;
+        let url = `${catalogServiceUrl}/api/v1/products/${productId}`;
         await fetch(url, {
             method: 'DELETE',
         });
 
         const term = getState().products.term;
-        url = `/api/v1/products?term=${term}`;
+        url = `${catalogServiceUrl}/api/v1/products?term=${term}`;
         const response = await fetch(url);
         const products = await response.json();
 
@@ -41,7 +38,7 @@ export const actionCreators = {
     addProduct: product => async (dispatch, getState) => {
         dispatch({type: addProductType, product});
 
-        let url = '/api/v1/products/';
+        let url = `${catalogServiceUrl}/api/v1/products/`;
         await fetch(url, {
             method: 'POST',
             cache: 'no-cache',
@@ -53,7 +50,7 @@ export const actionCreators = {
         });
 
         const term = getState().products.term;
-        url = `/api/v1/products?term=${term}`;
+        url = `${catalogServiceUrl}/api/v1/products?term=${term}`;
         const response = await fetch(url);
         const products = await response.json();
 
@@ -63,7 +60,7 @@ export const actionCreators = {
     updateProduct: product => async (dispatch, getState) => {
         dispatch({type: updateProductType, product});
 
-        let url = '/api/v1/products/';
+        let url = `${catalogServiceUrl}/api/v1/products/`;
         await fetch(url, {
             method: 'PUT',
             cache: 'no-cache',
@@ -75,7 +72,7 @@ export const actionCreators = {
         });
 
         const term = getState().products.term;
-        url = `/api/v1/products?term=${term}`;
+        url = `${catalogServiceUrl}/api/v1/products?term=${term}`;
         const response = await fetch(url);
         const products = await response.json();
 

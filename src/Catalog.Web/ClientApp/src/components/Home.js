@@ -10,7 +10,7 @@ class Home extends Component {
     state = {}
     
     componentWillMount() {
-        const term = 'p';
+        const term = '';
         this.props.requestProducts(term);
     }
 

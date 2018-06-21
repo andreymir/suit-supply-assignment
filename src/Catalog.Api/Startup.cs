@@ -28,7 +28,7 @@ namespace Catalog.Api
         {
             services.AddDbContext<CatalogContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("Catalog")));
-                //opt.UseInMemoryDatabase("Catalog"));
+            //opt.UseInMemoryDatabase("Catalog"));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -47,6 +47,8 @@ namespace Catalog.Api
                 ViewModels.Mappings.ConfigureViewModelMapping(cfg);
                 Mappings.ConfigureInputModelMapping(cfg);
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,11 @@ namespace Catalog.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
