@@ -110,6 +110,17 @@ namespace Catalog.Api.UnitTests.Controllers
             var actualProducts = new SortedSet<int>(result.Value.Select(x => x.Id));
             Assert.That(actualProducts, Is.EquivalentTo(expectedProducts));
         }
+        
+        [Test]
+        public async Task When_term_empty_then_Search_return_all_products()
+        {
+            var expectedProducts = new SortedSet<int>(_products.Select(x => x.Id));
+            
+            var result = await _controller.Search(null);
+            
+            var actualProducts = new SortedSet<int>(result.Value.Select(x => x.Id));
+            Assert.That(actualProducts, Is.EquivalentTo(expectedProducts));
+        }
 
         [Test]
         public async Task When_no_product_in_db_then_CreateProduct_creates_product()

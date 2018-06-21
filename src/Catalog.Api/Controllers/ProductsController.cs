@@ -30,9 +30,12 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<ProductViewModel>>> Search(string term)
         {
-            var products = await _catalogContext.Products
-                .Where(x => x.Name.StartsWith(term) || x.Code.StartsWith(term))
-                .ToListAsync();
+            var query = _catalogContext.Products.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                query = query.Where(x => x.Name.StartsWith(term) || x.Code.StartsWith(term));
+            }
+            var products = await query.ToListAsync();
             
             var viewModel = products
                 .Select(x => _mapper.Map<ProductViewModel>(x))
