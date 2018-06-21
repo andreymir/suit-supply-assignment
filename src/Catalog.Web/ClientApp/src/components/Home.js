@@ -7,7 +7,7 @@ import { Button, ButtonGroup, Glyphicon, Table, Grid, Row,
 
 class Home extends Component {
     
-    state = {}
+    state = {};
     
     componentWillMount() {
         const term = '';
@@ -46,6 +46,7 @@ class Home extends Component {
         return (
             <Form inline>
                 <FormGroup controlId="formCode">
+                    <ControlLabel>Code</ControlLabel>{' '}
                     <FormControl type="text" placeholder="code"
                                  value={this.state.code} onChange={this.handleInput('code')} />
                 </FormGroup>{' '}
